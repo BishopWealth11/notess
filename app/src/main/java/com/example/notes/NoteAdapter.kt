@@ -1,13 +1,14 @@
 package com.example.notes
 
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.databinding.NoteItemBinding
 import com.example.notes.models.Notes
 
-class NoteAdapter (private val notes: List <Notes>): RecyclerView.Adapter<NoteAdapter.NoteViewHolder> (){
-    class NoteViewHolder (private val binding: NoteItemBinding) :
+class NoteAdapter (private val notes: List <Notes>, clicker: (Notes) ->Unit, ): RecyclerView.Adapter<NoteAdapter.NoteViewHolder> (){
+   inner class NoteViewHolder (private val binding: NoteItemBinding,private val listener: OnNoteItemClickListener) :
     RecyclerView.ViewHolder(binding.root) {
         fun bind(note: Notes) {
             binding.apply {
@@ -28,5 +29,8 @@ class NoteAdapter (private val notes: List <Notes>): RecyclerView.Adapter<NoteAd
 
     override fun getItemCount(): Int {
         return notes.size
+    }
+    interface OnNoteItemClickListener{
+        fun onClick(note: ContactsContract.CommonDataKinds.Note)
     }
 }

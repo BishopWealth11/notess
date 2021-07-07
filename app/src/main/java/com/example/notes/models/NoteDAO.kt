@@ -19,4 +19,5 @@ interface NoteDAO {
 
     @Delete
     fun deleteNotes(note: Notes)
+    abstract fun addNote(note: Notes)
 }
